@@ -14,6 +14,7 @@ If you want to see a working implementation, check out the `implementation_compl
 
 The following shows what the output looks like when your binary search tree implementation is correct and you run the program.
 
+```
 testAddNode PASSED
 testFindNode PASSED
 testGetNodeLevel PASSED
@@ -37,7 +38,7 @@ The linear search took 58.3638 times longer than the binary search
 Linear search time for 100000 elements: 10753216 microseconds
 Binary search time for 100000 elements: 21353 microseconds
 The linear search took 503.593 times longer than the binary search
+```
 
 Notice that the Linear and Binary search times are very similar when there are a small (100) number of items; but, when there are a lot of times (100,000) the binary search is over 500 times faster!
-
 
