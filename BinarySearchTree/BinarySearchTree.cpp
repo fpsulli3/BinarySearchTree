@@ -18,135 +18,34 @@ struct Node {
 // value of nodeData, and returns a pointer to it.
 template <typename T>
 Node<T>* findNode(Node<T>* tree, T nodeData) {
-    if (tree == nullptr) {
-        return nullptr;
-    }
-
-    if (tree->data == nodeData) {
-        return tree;
-    }
-
-    Node<T>* nodeToVisit = (nodeData > tree->data) ? tree->right : tree->left;
-
-    return findNode(nodeToVisit, nodeData);
-}
-
-template <typename T>
-Node<T>* lift(Node<T>* tree, Node<T>* nodeToDelete) {
-    if (tree->left != nullptr) {
-        tree->left = lift(tree->left, nodeToDelete);
-        return tree;
-    }
-    else {
-        nodeToDelete->data = tree->data;
-        return tree->right;
-    }
+    return nullptr;
 }
 
 // Removes a Node from the Binary Tree.
 // Returns the same tree back, modified.
 template <typename T>
 Node<T>* removeNode(Node<T>* tree, T nodeValue) {
-    if (tree == nullptr) {
-        return nullptr;
-    }
-
-    if (nodeValue < tree->data) {
-        tree->left = removeNode(tree->left, nodeValue);
-        return tree;
-    } else if (nodeValue > tree->data) {
-        tree->right = removeNode(tree->right, nodeValue);
-        return tree;
-    } else if (tree->data == nodeValue) {
-        // Remove this node.
-        Node<T>* left = tree->left;
-        Node<T>* right = tree->right;
-        
-        if (left == nullptr && right == nullptr) {
-            // Tree has no successors and so it is now
-            // just an empty null tree.
-            delete tree;
-            return nullptr;
-        }
-
-        if (left == nullptr) {
-            // left is empty, so we can just replace 
-            // the tree entirely by right.
-            delete tree;
-            return right;
-        }
-
-        if (right == nullptr) {
-            // right is empty, so we can just replace 
-            // the tree entirely by left.
-            delete tree;
-            return left;        
-        }
-
-        // Both left and right are not empty, so we 
-        // have to do something more clever.
-        tree->right = lift(tree->right, tree);
-        return tree;
-    }
+    return nullptr;
 }
 
 // Adds a Node to the Binary Tree.
 template <typename T>
 void addNode(Node<T>* tree, T nodeData) {
 
-    if (tree == nullptr) {
-        return;
-    }
-
-    if (nodeData == tree->data) {
-        // Node already exists; we don't have to do anything
-        return;
-    }
-
-    Node<T>** nodeToVisit = (nodeData > tree->data) ? &tree->right : &tree->left;
-
-    if (*nodeToVisit == nullptr) {
-        *nodeToVisit = new Node<T>(nodeData);
-    }
-    else {
-        addNode(*nodeToVisit, nodeData);
-    }
 }
 
 // Returns true if the Binary Tree contains a node with 
 // a value matching nodeData; otherwise, returns false.
 template <typename T>
 bool hasNode(Node<T>* tree, T nodeData) {
-    return findNode(tree, nodeData) != nullptr;
+    return false;
 }
 
 // Gets the Level of the Node in the Binary Tree which has
 // a value matching nodeData. If no such Node exists, returns -1
 template <typename T>
 int getNodeLevel(Node<T>* tree, T nodeData, int level = 0) {
-    if (tree == nullptr) {
-        return -1;
-    }
-
-    if (tree->data == nodeData) {
-        return level;
-    }
-
-    if (tree->left != nullptr) {
-        int foundLevel = getNodeLevel(tree->left, nodeData, level + 1);
-        if (foundLevel > 0) {
-            return foundLevel;
-        }
-    }
-
-    if (tree->right != nullptr) {
-        int foundLevel = getNodeLevel(tree->right, nodeData, level + 1);
-        if (foundLevel > 0) {
-            return foundLevel;
-        }
-    }
-
-    return -1;
+    return level;
 }
 
 // Frees up the memory for an entire Binary Tree
@@ -210,8 +109,6 @@ void shuffleArray(T* array, int count) {
         array[i - 1] = temp;
     }
 }
-
-
 
 bool assertLeaf(const char* tag, Node<char>* node, char expectedData) {
     if (node == nullptr) {
